@@ -1,0 +1,11 @@
+.card-container{
+    margin: 10px;
+    padding: 10px;
+    background-color: antiquewhite;
+    border-radius: 10px;
+    min-width: 300px;
+}
+.card-container ul{
+    list-style: none;
+    line-height: 150%;
+}
