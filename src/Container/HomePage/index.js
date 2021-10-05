@@ -12,7 +12,7 @@ const HomePage = () => {
   const [totalCount, settotalCount] = useState(1);
   const [searchFilter, setsearchFilter] = useState("Full Name");
   const [_start, set_start] = useState(0);
-  const [_end, set_end] = useState(10);
+  const [_end, set_end] = useState(limitPerPage);
   const [isLoading, setisLoading] = useState(false);
 
   const [_users, setUsers] = useState([]);
@@ -47,6 +47,8 @@ const HomePage = () => {
       console.log("error", e);
     }
   };
+
+
 
   const onNextPage = ({ selected }) => {
     console.log("selected", selected);

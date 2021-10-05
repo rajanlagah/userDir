@@ -6,19 +6,20 @@ const getUsers = async ({
   searchQuery,
   queryProperty
 }) => {
-  const params = {
-    [queryProperty]: searchQuery,
+  let params = {
     _start,
     _end
   };
-
+  if (searchQuery) {
+    params = { ...params, [queryProperty]: searchQuery };
+  }
   try {
     const users = await axios.get("http://localhost:5000/users", {
       params
     });
-    console.log(users)
+    console.log(users);
     return {
-      data:users.data,
+      data: users.data,
       totalCount: users.headers["x-total-count"]
     };
   } catch (e) {
@@ -38,20 +39,16 @@ const updateUser = async ({ id, user }) => {
     });
     return users.data;
   } catch (e) {
-    throw Error("Failed")
+    throw Error("Failed");
     console.log("Error");
   }
 };
 
 const deleteUser = async ({ id }) => {
   try {
-    const users = await axios({
-      method: "delete",
-      url: `http://localhost:5000/users/${id}`
-    });
-    return users.data;
+    await axios.delete(`http://localhost:5000/users/2`);
   } catch (e) {
-    throw Error("Failed")
+    throw Error("Failed");
     console.log("Error");
   }
 };
@@ -65,7 +62,7 @@ const addNewUserData = async (user) => {
     });
     return;
   } catch (e) {
-    throw Error("Failed")
+    throw Error("Failed");
     console.log("Error");
   }
 };
