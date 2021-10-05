@@ -57,7 +57,7 @@ const HomePage = () => {
   };
 
   return (
-    <div>
+    <>
       <div className="flex-row">
         <div className="flex-sm">
           <Filter
@@ -93,7 +93,7 @@ const HomePage = () => {
           activeClassName={"active"}
         />
       )}
-    </div>
+    </>
   );
 };
 

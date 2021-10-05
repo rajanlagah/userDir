@@ -59,7 +59,7 @@ function CardContainer({
       setshowSuccess(true);
       setshowError(false);
       setalertMsg("User added")
-      
+
     } catch (e) {
       setshowSuccess(false);
       setshowError(true);
@@ -81,7 +81,7 @@ function CardContainer({
   };
 
   return (
-    <div>
+    <>
       <Card
         Country={country}
         dob={dob}
@@ -100,7 +100,7 @@ function CardContainer({
         isNewUser={isNewUser}
         saveUser={saveUser}
       />
-    </div>
+    </>
   );
 }
 
