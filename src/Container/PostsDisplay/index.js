@@ -14,7 +14,7 @@ const PostDisplay = ({ _users, onUserDelete, isLoading }) => {
     <span>Loading data ....</span>;
   }
   return (
-    <div>
+    <div >
       {(showSuccess || showError) && (
         <Alert isSuccess={showSuccess} msg={alertMsg} />
       )}

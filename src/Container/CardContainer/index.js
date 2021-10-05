@@ -37,11 +37,11 @@ function CardContainer({
 
       setshowSuccess(true);
       setshowError(false);
-      setalertMsg("User updated")
+      setalertMsg("User updated");
     } catch (e) {
       setshowSuccess(false);
       setshowError(true);
-      setalertMsg("User update fail")
+      setalertMsg("User update fail");
       console.log("error is", e);
     }
   };
@@ -58,12 +58,11 @@ function CardContainer({
 
       setshowSuccess(true);
       setshowError(false);
-      setalertMsg("User added")
-
+      setalertMsg("User added");
     } catch (e) {
       setshowSuccess(false);
       setshowError(true);
-      setalertMsg("User not added")
+      setalertMsg("User not added");
       console.log("error is", e);
     }
   };
@@ -81,26 +80,24 @@ function CardContainer({
   };
 
   return (
-    <>
-      <Card
-        Country={country}
-        dob={dob}
-        email={email}
-        name={name}
-        id={user["Id"]}
-        key={`${user["Email"]} ${user["Created at"]}`}
-        onEditClick={onEditClick}
-        isEditMode={edit}
-        exitEditMode={onExitEditMode}
-        setCountry={setCountry}
-        setdob={setdob}
-        setemail={setemail}
-        setname={setname}
-        onUserDelete={onUserDelete}
-        isNewUser={isNewUser}
-        saveUser={saveUser}
-      />
-    </>
+    <Card
+      Country={country}
+      dob={dob}
+      email={email}
+      name={name}
+      id={user["Id"]}
+      key={`${user["Email"]} ${user["Created at"]}`}
+      onEditClick={onEditClick}
+      isEditMode={edit}
+      exitEditMode={onExitEditMode}
+      setCountry={setCountry}
+      setdob={setdob}
+      setemail={setemail}
+      setname={setname}
+      onUserDelete={onUserDelete}
+      isNewUser={isNewUser}
+      saveUser={saveUser}
+    />
   );
 }
 
