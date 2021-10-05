@@ -1,42 +1,98 @@
+import ReactPaginate from "react-paginate";
+
 import Search from "../../Component/Search";
 import PostDisplay from "../PostsDisplay/index";
 import Filter from "../../Component/Filter";
 import { useState, useEffect } from "react";
-import { getUsers } from "../../action/user";
+import { deleteUser, getUsers } from "../../action/user";
 
-function HomePage() {
+const HomePage = () => {
+  const limitPerPage = 10;
   const [searchQuery, setsearchQuery] = useState(null);
-  const [doSearch, setdoSearch] = useState(false);
+  const [totalCount, settotalCount] = useState(1);
+  const [searchFilter, setsearchFilter] = useState("Full Name");
+  const [_start, set_start] = useState(0);
+  const [_end, set_end] = useState(10);
+  const [isLoading, setisLoading] = useState(false);
 
   const [_users, setUsers] = useState([]);
 
   useEffect(() => {
     getSetUserData();
-  }, []);
+  }, [_start, _end]);
 
   const getSetUserData = async () => {
+    setisLoading(true);
     try {
-      const users = await getUsers({searchQuery});
-      console.log(users);
-      setUsers(users);
+      const users = await getUsers({
+        searchQuery,
+        queryProperty: searchFilter,
+        _start,
+        _end
+      });
+      setUsers([...users.data]);
+      settotalCount(users.totalCount);
+      setisLoading(false);
+    } catch (e) {
+      setisLoading(false);
+      console.log("error", e);
+    }
+  };
+
+  const onUserDelete = async (id) => {
+    try {
+      const users = await deleteUser({ id });
+      getSetUserData();
     } catch (e) {
       console.log("error", e);
     }
+  };
+
+  const onNextPage = ({ selected }) => {
+    console.log("selected", selected);
+    set_start(selected * limitPerPage);
+    set_end((selected + 1) * limitPerPage);
   };
 
   return (
     <div>
       <div className="flex-row">
         <div className="flex-sm">
-          <Filter />
+          <Filter
+            selectedValue={searchFilter}
+            onChange={({ target }) => setsearchFilter(target.value)}
+          />
         </div>
         <div className="flex-lg">
-          <Search onChange={({ target }) => setsearchQuery(target.value)} onDoSearchClick={()=>getSetUserData()}/>
+          <Search
+            onChange={({ target }) => setsearchQuery(target.value)}
+            onDoSearchClick={() => getSetUserData()}
+          />
         </div>
       </div>
-      <PostDisplay searchQuery={searchQuery} _users={_users} />
+      <PostDisplay
+        onUserDelete={onUserDelete}
+        searchQuery={searchQuery}
+        _users={_users}
+        isLoading={isLoading}
+      />
+      {_users && _users.length > 0 && (
+        <ReactPaginate
+          previousLabel={"<"}
+          nextLabel={">"}
+          breakLabel={"..."}
+          breakClassName={"break-me"}
+          pageCount={totalCount / limitPerPage}
+          marginPagesDisplayed={2}
+          pageRangeDisplayed={5}
+          onPageChange={onNextPage}
+          containerClassName={"pagination"}
+          subContainerClassName={"pages pagination"}
+          activeClassName={"active"}
+        />
+      )}
     </div>
   );
-}
+};
 
 export default HomePage;

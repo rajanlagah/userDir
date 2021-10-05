@@ -1,0 +1,30 @@
+.alert {
+  width: 80%;
+  margin: 10px 10%;
+  text-align: center;
+  display: inline-block;
+  border-radius: 10px;
+
+  animation-name: fade;
+  animation-duration: 4s;
+  animation-delay: 4s;
+  animation-fill-mode: forwards;
+}
+.alert-success {
+  background-color: lightgreen;
+  padding: 10px;
+}
+
+.alert-error {
+  background-color: rgb(255, 58, 58);
+  padding: 10px;
+  color: #fff;
+}
+@keyframes fade {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}

@@ -5,7 +5,7 @@ const Filter = ({ selectedValue, onChange }) => (
     <label>
       Filter:
       <select value={selectedValue} onChange={onChange}>
-        <option value="username">Username</option>
+        <option value="Full Name">Username</option>
         <option value="Country">Country</option>
         <option value="DOB">DOB</option>
       </select>

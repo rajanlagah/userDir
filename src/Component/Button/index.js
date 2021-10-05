@@ -10,6 +10,9 @@ const Button = ({ label, onClick, safe, plain, danger }) => {
   if(plain){
     _className += " btn-plain";
   }
+  if(danger){
+    _className += " btn-danger";
+  }
 
   return (
     <button className={_className} onClick={onClick}>

@@ -1,6 +1,5 @@
 import React from "react";
 
-
 const SmartInput = ({ disable = true, value, inputName, onChange }) => {
   if (disable) {
     return <span>{value}</span>;
